@@ -46,8 +46,8 @@ r = authenticate_broken(username = 'admin',
                     password = 'admin')
 print(f'regular: {r}')
 
-r = authenticate_broken(username = '"SELECT IF(1=2,(SELECT table_name FROM information_schema.tables),\'tachanka\')',
-                    password = 'a')
+r = authenticate_broken(username = '" or 1=1 LIMIT 1;#',
+                    password = '')
 print(f'sqli: {r}')
 
 r = authenticate_broken(username = 'admin',

@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>Reflected XSS</title>
+    </head>
+    <body>
+        <p id="output">Hello World</p>
+        <input id="username" autocomplete="off" type="text">
+        <input id="password" autocomplete="off" type="password">
+        <button onclick="reflectInput()">Submit</button>
+        <script>
+            function reflectInput(){
+                jsOutput = document.getElementById('output');
+                jsUsername = document.getElementById('username');
+                // payload
+                // <img src='x' onerror="alert('xss');">
+                
+                jsOutput.innerHTML = jsUsername.value; //Vulnerable
+                // Mitigation from : https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
+                // jsOutput.textContent = jsUsername.value;  //Mitigated
+            }
+        </script>
+    </body>
+</html>
